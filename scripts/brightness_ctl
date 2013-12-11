@@ -1,0 +1,10 @@
+#!/bin/sh
+
+FONT="-bitstream-bitstream vera sans-bold-r-*-*-*-120-*-*-*-*-iso8859-15"
+
+max_brightness=15
+brightness=$(cat /sys/class/backlight/acpi_video0/brightness)
+percent=$((brightness*100/max_brightness))
+
+killall osd_cat >/dev/null 2>&1
+osd_cat -p "bottom" -c "green" -s 2 -d 3 -o 50 -A "center" -l 1 --font="$FONT$" -b "percentage" -P $percent -T "Brightness: $percent%"

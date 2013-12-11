@@ -1,0 +1,12 @@
+#!/bin/sh
+
+FONT="-bitstream-bitstream vera sans-bold-r-*-*-*-120-*-*-*-*-iso8859-15"
+status=`systemctl is-active wicd.service`
+
+if [ "$status" = "active" ]; then
+	sudo systemctl stop wicd.service
+	echo "WLAN disabled" | osd_cat -p "bottom" -c "red" -s 2 -d 3 -o 50 -A "center" -l 1 --font="$FONT$"
+else
+	sudo systemctl start wicd.service
+	echo "WLAN enabled" | osd_cat -p "bottom" -c "green" -s 2 -d 3 -o 50 -A "center" -l 1 --font="$FONT$"
+fi
