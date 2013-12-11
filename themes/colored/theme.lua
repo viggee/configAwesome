@@ -4,24 +4,24 @@
 -- http://theimmortalphoenix.deviantart.com/  --
 ------------------------------------------------
 
--- {{{ Main
+---------------------------------------------------------------------------
+-- Init
+---------------------------------------------------------------------------
 
 theme = {}
 theme.confdir = os.getenv("HOME") .. "/.config/awesome/themes/colored"
 
--- }}}
+---------------------------------------------------------------------------
+-- Font, Wallpaper, Icon Theme
+---------------------------------------------------------------------------
 
--- {{{ Font
-
- theme.font      = "Termsyn 12"
-
--- }}}
-
--- {{{ Colors
-
+theme.font      = "Termsyn 12"
 theme.wallpaper = "/home/viktor/Bilder/Wallpaper/blue_noise.png"
+theme.icon_theme = "Faenza-Darkest"
 
-theme.icon_theme = "Faenza-Darkest" 
+---------------------------------------------------------------------------
+-- Colors
+---------------------------------------------------------------------------
 
 -- theme.bg_systray = theme.bg_normal
 
@@ -45,18 +45,18 @@ theme.fg_cyan       = "#778baf"
 theme.fg_white      = "#aaaaaa"
 theme.fg_blu        = "#8ebdde"
 
--- }}}
-
--- {{{ Borders
+---------------------------------------------------------------------------
+-- Borders
+---------------------------------------------------------------------------
 
 theme.border_width  = 1
 theme.border_normal = "#202020"
 theme.border_focus  = "#535d6c"
 theme.border_marked = "#91231c"
 
--- }}}
-
--- {{{ Menu
+---------------------------------------------------------------------------
+-- Menu
+---------------------------------------------------------------------------
 
 theme.menu_height       = "8"
 theme.menu_width        = "105"
@@ -66,12 +66,11 @@ theme.menu_fg_focus     = "#7788af"
 theme.menu_bg_normal    = "#080808"   --background menu
 theme.menu_bg_focus     = "#080808"
 
--- }}}
+---------------------------------------------------------------------------
+-- Widgets
+---------------------------------------------------------------------------
 
--- {{{ Icons
-
--- {{{  Widget icons
-
+-- Icons
 theme.widget_uptime     = theme.confdir .. "/widgets/magenta/ac.png"
 theme.widget_cpu        = theme.confdir .. "/widgets/yellow/cpu.png"
 theme.widget_temp       = theme.confdir .. "/widgets/yellow/temp.png"
@@ -90,10 +89,7 @@ theme.widget_clock      = theme.confdir .. "/widgets/cyan/clock.png"
 theme.widget_vol        = theme.confdir .. "/widgets/blue/spkr_01.png"
 theme.widget_vol_mute   = theme.confdir .. "/widgets/blue/spkr_01_mute.png"
 
--- }}}
-
--- Widget Colors
-
+-- Colors
 theme.widget_blue		= "#5a667f"
 theme.widget_cyan		= "#778baf"
 theme.widget_red		= "#ce5666"
@@ -102,22 +98,25 @@ theme.widget_yellow		= "#ffaf5f"
 theme.widget_green		= "#87af5f"
 theme.widget_black		= "#0e0e0e"
 
--- {{{ Taglist
+---------------------------------------------------------------------------
+-- Taglist
+---------------------------------------------------------------------------
+
 
 theme.taglist_squares_sel   = theme.confdir .. "/taglist/squaref_b.png"
 theme.taglist_squares_unsel = theme.confdir .. "/taglist/square_b.png"
 
 --theme.taglist_squares_resize = "false"
 
--- }}}
-
--- {{{ Misc
+---------------------------------------------------------------------------
+-- Misc
+---------------------------------------------------------------------------
 
 theme.tasklist_floating_icon = theme.confdir .. "/floating.png"
 
--- }}}
-
--- {{{ Layout
+---------------------------------------------------------------------------
+-- Layout
+---------------------------------------------------------------------------
 
 theme.layout_tile       = theme.confdir .. "/layouts/tile.png"
 theme.layout_tileleft   = theme.confdir .. "/layouts/tileleft.png"
@@ -132,8 +131,5 @@ theme.layout_fullscreen = theme.confdir .. "/layouts/fullscreen.png"
 theme.layout_magnifier  = theme.confdir .. "/layouts/magnifier.png"
 theme.layout_floating   = theme.confdir .. "/layouts/floating.png"
 
--- }}}
-
--- }}}
 
 return theme
