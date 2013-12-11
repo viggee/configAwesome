@@ -79,7 +79,7 @@ end
 
   run_once("compton -C")
   run_once("dropboxd", 1)
-  run_once("files")
+  run_once("thunar")
   run_once("chromium", 1)
   awful.util.spawn_with_shell("urxvt")
   awful.util.spawn_with_shell("urxvt")
@@ -697,7 +697,7 @@ globalkeys = awful.util.table.join(
     awful.key({ }, "XF86MonBrightnessUp",	function () awful.util.spawn("brightness_ctl") end),
     awful.key({ }, "XF86MonBrightnessDown", function () awful.util.spawn("brightness_ctl") end),
     awful.key({ }, "XF86Launch1",    		function () awful.util.spawn("urxvt -e wicd-curses") end),
-    awful.key({ modkey }, "p", 				function () awful.util.spawn("files") end),
+    awful.key({ modkey }, "p", 				function () awful.util.spawn("thunar") end),
     awful.key({ modkey }, "c", 				function () awful.util.spawn("urxvt -e mc") end)
 )
 
@@ -818,7 +818,7 @@ awful.rules.rules = {
       properties = { tag = tags[1][2] } },    
     { rule = { class = "xbmc.bin" },
       properties = { tag = tags[1][9] } },       
-    { rule = { class = "Pcmanfm" },
+    { rule = { class = "Thunar" },
       properties = { tag = tags[1][3] } },
     { rule = { name = "Editor.*" },
       properties = { tag = tags[1][5] } },
