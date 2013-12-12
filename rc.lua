@@ -2,6 +2,7 @@
 -- rc.lua awesome wm config -----------------------------------------------
 ---------------------------------------------------------------------------
 
+rcType = "box"
 
 ---------------------------------------------------------------------------
 -- include awesome libraries
@@ -77,12 +78,17 @@ end
 -- Autostart
 ---------------------------------------------------------------------------
 
-  run_once("compton -C")
-  run_once("dropboxd", 1)
-  run_once("thunar")
-  run_once("chromium", 1)
-  awful.util.spawn_with_shell("urxvt")
-  awful.util.spawn_with_shell("urxvt")
+run_once("compton -C")
+run_once("dropboxd", 1)
+run_once("thunar")
+run_once("chromium", 1)
+awful.util.spawn_with_shell("urxvt")
+awful.util.spawn_with_shell("urxvt")
+if rcType == "box" then
+	run_once("conky")
+	run_once("mpd")
+	run_once("parcellite")
+end
 
 ---------------------------------------------------------------------------
 -- Error handling
@@ -153,7 +159,7 @@ end
 
 tags = {}
 for s = 1, screen.count() do
-    tags[s] = awful.tag({ "term ", "web ", "files ", "work ", "matlab ", 6, 7, 8, 9 }, s, 
+    tags[s] = awful.tag({ "term ", "web ", "files ", "work ", 5, 6, 7, 8, 9 }, s, 
 		{ layouts[2], layouts[1], layouts[2], layouts[2], layouts[2], layouts[2], layouts[2], layouts[2], layouts[2] })
 end
 
@@ -199,7 +205,7 @@ mytextclockicon:set_image(beautiful.widget_clock)
 sysicon = wibox.widget.imagebox()
 sysicon:set_image(beautiful.widget_sys)
 syswidget = wibox.widget.textbox()
-vicious.register( syswidget, vicious.widgets.os, "<span color=\"".. beautiful.widget_green .."\">$2</span>")
+vicious.register( syswidget, vicious.widgets.os, "<span color=\"".. beautiful.widget_magenta .."\">$2</span>")
 
 ---------------------------------------------------------------------------
 -- Uptime
@@ -208,7 +214,7 @@ vicious.register( syswidget, vicious.widgets.os, "<span color=\"".. beautiful.wi
 uptimeicon = wibox.widget.imagebox()
 uptimeicon:set_image(beautiful.widget_uptime)
 uptimewidget = wibox.widget.textbox()
-vicious.register( uptimewidget, vicious.widgets.uptime, "<span color=\"".. beautiful.widget_magenta .."\">$2.$3'</span>")
+vicious.register( uptimewidget, vicious.widgets.uptime, "<span color=\"".. beautiful.widget_red .."\">$2.$3'</span>")
 
 ---------------------------------------------------------------------------
 -- HDD
@@ -218,7 +224,7 @@ fsicon = wibox.widget.imagebox()
 fsicon:set_image(beautiful.widget_fs)
 vicious.cache(vicious.widgets.fs)
 fswidget = wibox.widget.textbox()
-vicious.register(fswidget, vicious.widgets.fs, "<span color=\"".. beautiful.widget_cyan .."\">${/ used_p}%</span>", 10)
+vicious.register(fswidget, vicious.widgets.fs, "<span color=\"".. beautiful.widget_green .."\">${/ used_p}%</span>", 10)
 
 local function dispdisk()
 	local f, infos
@@ -238,7 +244,7 @@ local function dispdisk()
         margin = 10,
         height = 105,
         width = 620,
-        border_color = '#404040',
+        border_color = beautiful.border_widget,
         border_width = 1,
         -- opacity = 0.95,
 		screen	= capi.mouse.screen })
@@ -264,57 +270,60 @@ space:set_text(' ')
 -- Battery
 ---------------------------------------------------------------------------
 
-function updateBattIcon()
-	local handle = io.popen("cat /sys/class/power_supply/BAT0/status")
-	local status = handle:read("*line")
-	handle:close()
-	local handle = io.popen("cat /sys/class/power_supply/BAT0/capacity")
-	local cap = tonumber(handle:read("*line"))
-	handle:close()
-	if status == "Discharging" then
-			if cap >= 40 then
-				batticon:set_image(beautiful.widget_batt_full)
-			elseif cap > 15 then
-				batticon:set_image(beautiful.widget_batt_low)
-			else
-				batticon:set_image(beautiful.widget_batt_empty)
-			end
-	elseif status == "Charging" then
-			batticon:set_image(beautiful.widget_batt_ac)
-	else
-			batticon:set_image(beautiful.widget_batt_empty)
-	end
-end
+if rcType == "notebook" then
 
-batticon = wibox.widget.imagebox()
-updateBattIcon()
-battwidget = wibox.widget.textbox()
-batt_warning = false
-vicious.register(battwidget, vicious.widgets.bat,
-	function(widget, args)
-		local color
-		if args[2] >= 40 then
-			color = beautiful.widget_green
-			batt_warning = false
-		elseif args[2] > 15 then
-			color = beautiful.widget_yellow
-			batt_warning = false
+	function updateBattIcon()
+		local handle = io.popen("cat /sys/class/power_supply/BAT0/status")
+		local status = handle:read("*line")
+		handle:close()
+		local handle = io.popen("cat /sys/class/power_supply/BAT0/capacity")
+		local cap = tonumber(handle:read("*line"))
+		handle:close()
+		if status == "Discharging" then
+				if cap >= 40 then
+					batticon:set_image(beautiful.widget_batt_full)
+				elseif cap > 15 then
+					batticon:set_image(beautiful.widget_batt_low)
+				else
+					batticon:set_image(beautiful.widget_batt_empty)
+				end
+		elseif status == "Charging" then
+				batticon:set_image(beautiful.widget_batt_ac)
 		else
-			if batt_warning == false then
-				naughty.notify({ text="Bitte Ladekabel anschließen.",
-								 title="Schwacher Akkuzustand!",
-								 fg=beautiful.widget_red,
-								 icon="/home/viktor/.config/awesome/themes/colored/widgets/red/bat_low_02.png",
-								 timeout=0 })
-			end
-			color = beautiful.widget_red
-			batt_warning = true
+				batticon:set_image(beautiful.widget_batt_empty)
 		end
-		
-		updateBattIcon()
-		
-		return "<span color=\"".. color .."\">".. args[2] .."%</span>"
-    end, 61, "BAT0")
+	end
+
+	batticon = wibox.widget.imagebox()
+	updateBattIcon()
+	battwidget = wibox.widget.textbox()
+	batt_warning = false
+	vicious.register(battwidget, vicious.widgets.bat,
+		function(widget, args)
+			local color
+			if args[2] >= 40 then
+				color = beautiful.widget_green
+				batt_warning = false
+			elseif args[2] > 15 then
+				color = beautiful.widget_yellow
+				batt_warning = false
+			else
+				if batt_warning == false then
+					naughty.notify({ text="Bitte Ladekabel anschließen.",
+									 title="Schwacher Akkuzustand!",
+									 fg=beautiful.widget_red,
+									 icon="/home/viktor/.config/awesome/themes/colored/widgets/red/bat_low_02.png",
+									 timeout=0 })
+				end
+				color = beautiful.widget_red
+				batt_warning = true
+			end
+			
+			updateBattIcon()
+			
+			return "<span color=\"".. color .."\">".. args[2] .."%</span>"
+		end, 61, "BAT0")
+end
 
 ---------------------------------------------------------------------------
 -- Temperature
@@ -327,7 +336,7 @@ tempicon:buttons(awful.util.table.join(
 	-- awful.button({ }, 3, function () awful.util.spawn("sudo irqbalance", false) end)
 ))
 tempwidget = wibox.widget.textbox()
-vicious.register(tempwidget, vicious.widgets.thermal, "<span color=\"#ffaf5f\">$1°C</span>", 9, { "coretemp.0", "core"} )
+vicious.register(tempwidget, vicious.widgets.thermal, "<span color=\"".. beautiful.widget_cyan .."\">$1°C</span>", 9, { "coretemp.0", "core"} )
 
 local function disptemp()
 	local f, infos
@@ -347,7 +356,7 @@ local function disptemp()
         margin = 10,
         height = 120,
         width = 420,
-        border_color = '#404040',
+        border_color = beautiful.border_widget,
         border_width = 1,
         -- opacity = 0.95,
 		screen	= capi.mouse.screen })
@@ -410,16 +419,24 @@ memicon:buttons(awful.util.table.join(
 -- Network
 ---------------------------------------------------------------------------
 
+if rcType == "box" then
+	netInterface = "enp3s0"
+elseif rcType == "netbook" then
+	netInterface = "wlp3s0"
+else
+	netInterface = "enp3s0"
+end
+
 netdownicon = wibox.widget.imagebox()
 netdownicon:set_image(beautiful.widget_netdown)
 netupicon = wibox.widget.imagebox()
 netupicon:set_image(beautiful.widget_netup)
 
 wifidowninfo = wibox.widget.textbox()
-vicious.register(wifidowninfo, vicious.widgets.net, "<span color=\"".. beautiful.widget_red .."\">${wlp3s0 down_kb}</span>", 1)
+vicious.register(wifidowninfo, vicious.widgets.net, "<span color=\"".. beautiful.widget_red .."\">${".. netInterface .." down_kb}</span>", 1)
 
 wifiupinfo = wibox.widget.textbox()
-vicious.register(wifiupinfo, vicious.widgets.net, "<span color=\"".. beautiful.widget_green .."\">${wlp3s0 up_kb}</span>", 1)
+vicious.register(wifiupinfo, vicious.widgets.net, "<span color=\"".. beautiful.widget_green .."\">${".. netInterface .." up_kb}</span>", 1)
 
 local function dispip()
 	local f, infos
@@ -439,9 +456,8 @@ local function dispip()
         margin = 10,
         height = 33,
         width = 160,
-        fg = beautiful.fg_focus,
-        -- border_color = '#404040',
-        -- border_width = 1,
+        border_color = beautiful.border_widget,
+        border_width = 1,
         -- opacity = 0.95,
 		screen	= capi.mouse.screen })
 end
@@ -559,27 +575,31 @@ for s = 1, screen.count() do
     right_layout:add(volumewidget)
     right_layout:add(space)
     right_layout:add(space)
-    --right_layout:add(tempicon)
-    --right_layout:add(tempwidget)  
-    --right_layout:add(space)
-    --right_layout:add(space)
-    --right_layout:add(uptimeicon)
-    --right_layout:add(uptimewidget)
-    --right_layout:add(space)
-    --right_layout:add(fsicon)
-    --right_layout:add(fswidget)
-    --right_layout:add(space)
-    --right_layout:add(space)    
-    --right_layout:add(sysicon)
-    --right_layout:add(syswidget)
-    --right_layout:add(space)
-    --right_layout:add(space)    
+    if rcType == "box" then
+		right_layout:add(tempicon)
+		right_layout:add(tempwidget)  
+		right_layout:add(space)
+		right_layout:add(space)
+		right_layout:add(uptimeicon)
+		right_layout:add(uptimewidget)
+		right_layout:add(space)
+		right_layout:add(fsicon)
+		right_layout:add(fswidget)
+		right_layout:add(space)
+		right_layout:add(space)    
+		right_layout:add(sysicon)
+		right_layout:add(syswidget)
+		right_layout:add(space)
+		right_layout:add(space)    
+    end
     right_layout:add(mytextclockicon)
-    right_layout:add(mytextclock)   
-    right_layout:add(batticon)
-    right_layout:add(battwidget)
-    right_layout:add(space)
-	right_layout:add(space)   
+    right_layout:add(mytextclock)
+    if rcType == "notebook" then   
+		right_layout:add(batticon)
+		right_layout:add(battwidget)
+		right_layout:add(space)
+		right_layout:add(space)   
+	end
     if s == 1 then right_layout:add(wibox.widget.systray()) end
     right_layout:add(space)
     right_layout:add(space)     

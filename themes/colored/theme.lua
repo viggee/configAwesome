@@ -53,6 +53,7 @@ theme.border_width  = 1
 theme.border_normal = "#202020"
 theme.border_focus  = "#535d6c"
 theme.border_marked = "#91231c"
+theme.border_widget	= "#404040"
 
 ---------------------------------------------------------------------------
 -- Menu
@@ -71,15 +72,15 @@ theme.menu_bg_focus     = "#080808"
 ---------------------------------------------------------------------------
 
 -- Icons
-theme.widget_uptime     = theme.confdir .. "/widgets/magenta/ac.png"
+theme.widget_uptime     = theme.confdir .. "/widgets/red/ac.png"
 theme.widget_cpu        = theme.confdir .. "/widgets/yellow/cpu.png"
-theme.widget_temp       = theme.confdir .. "/widgets/yellow/temp.png"
+theme.widget_temp       = theme.confdir .. "/widgets/cyan/temp.png"
 theme.widget_mem        = theme.confdir .. "/widgets/magenta/mem.png"
-theme.widget_fs         = theme.confdir .. "/widgets/cyan/usb.png"
+theme.widget_fs         = theme.confdir .. "/widgets/green/usb.png"
 theme.widget_netdown    = theme.confdir .. "/widgets/red/net_down_03.png"
 theme.widget_netup      = theme.confdir .. "/widgets/green/net_up_03.png"
 theme.widget_gmail      = theme.confdir .. "/widgets/magenta/mail.png"
-theme.widget_sys        = theme.confdir .. "/widgets/green/dish.png"
+theme.widget_sys        = theme.confdir .. "/widgets/magenta/dish.png"
 theme.widget_pac        = theme.confdir .. "/widgets/green/pacman.png"
 theme.widget_batt_full  = theme.confdir .. "/widgets/green/bat_full_01.png"
 theme.widget_batt_ac    = theme.confdir .. "/widgets/blue/ac_01.png"
