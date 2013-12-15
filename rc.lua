@@ -634,25 +634,6 @@ root.buttons(awful.util.table.join(
 -- Key Bindings (Global)
 ---------------------------------------------------------------------------
 
-function zoomDesktop()
-	local handle = io.popen("xrandr | grep '*'")
-	local res = handle:read("*l")
-	res = handle:read("*l")
-	handle:close()
-	if res then		
-		for x in string.gmatch(res, "%d%d%d%dx") do
-			x = string.sub(x,1,4)
-			if x == "1920" then
-				io.popen("xrandr --output HDMI1 --mode 1280x720 --panning 1920x1080")
-			else
-				io.popen("xrandr --output HDMI1 --mode 1920x1080")
-			end
-		end	
-	else
-		return
-	end
-end
-
 globalkeys = awful.util.table.join(
 	-- Switch Tag
 	awful.key({ modkey,           }, "Left",   awful.tag.viewprev       ),
