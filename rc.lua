@@ -85,6 +85,7 @@ run_once("chromium", 1)
 awful.util.spawn_with_shell("urxvt")
 awful.util.spawn_with_shell("urxvt")
 if rcType == "box" then
+	run_once("sudo rc11mod4.py")
 	run_once("conky")
 	run_once("mpd")
 	run_once("parcellite")
@@ -632,6 +633,26 @@ root.buttons(awful.util.table.join(
 ---------------------------------------------------------------------------
 -- Key Bindings (Global)
 ---------------------------------------------------------------------------
+
+function zoomDesktop()
+	local handle = io.popen("xrandr | grep '*'")
+	local res = handle:read("*l")
+	res = handle:read("*l")
+	handle:close()
+	if res then		
+		for x in string.gmatch(res, "%d%d%d%dx") do
+			x = string.sub(x,1,4)
+			if x == "1920" then
+				io.popen("xrandr --output HDMI1 --mode 1280x720 --panning 1920x1080")
+			else
+				io.popen("xrandr --output HDMI1 --mode 1920x1080")
+			end
+		end	
+	else
+		return
+	end
+end
+
 globalkeys = awful.util.table.join(
 	-- Switch Tag
 	awful.key({ modkey,           }, "Left",   awful.tag.viewprev       ),
@@ -717,8 +738,29 @@ globalkeys = awful.util.table.join(
     awful.key({ }, "XF86MonBrightnessUp",	function () awful.util.spawn("brightness_ctl") end),
     awful.key({ }, "XF86MonBrightnessDown", function () awful.util.spawn("brightness_ctl") end),
     awful.key({ }, "XF86Launch1",    		function () awful.util.spawn("urxvt -e wicd-curses") end),
+    awful.key({ }, "XF86PowerOff",    		function () awful.util.spawn("sudo shutdown -h now") end),
     awful.key({ modkey }, "p", 				function () awful.util.spawn("thunar") end),
-    awful.key({ modkey }, "c", 				function () awful.util.spawn("urxvt -e mc") end)
+    awful.key({ modkey }, "c", 				function () awful.util.spawn("urxvt -e mc") end),
+    
+    -- Zoom
+    awful.key({ modkey }, "z",				function ()   
+		local handle = io.popen("xrandr | grep '*'")
+		local res = handle:read("*l")
+		res = handle:read("*l")
+		handle:close()
+		if res then		
+			for x in string.gmatch(res, "%d%d%d%dx") do
+				x = string.sub(x,1,4)
+				if x == "1920" then
+					io.popen("xrandr --output HDMI1 --mode 1280x720 --panning 1920x1080")
+				else
+					io.popen("xrandr --output HDMI1 --mode 1920x1080")
+				end
+			end	
+		else
+			return
+		end 
+    end)
 )
 
 ---------------------------------------------------------------------------

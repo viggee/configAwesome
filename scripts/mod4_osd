@@ -1,0 +1,17 @@
+#!/bin/sh
+
+POS=bottom
+COLOR=green
+SHADOW=2
+DELAY=3
+OFFSET=50
+ALIGN=center
+FONT="-bitstream-bitstream vera sans-bold-r-*-*-*-120-*-*-*-*-iso8859-15"
+
+killall osd_cat >/dev/null 2>&1   # if the -a switch worked, we wouldn't need this
+
+if [ $1 == "off" ]; then
+	COLOR=brown
+fi
+
+echo "SUPER $1" | osd_cat -p "$POS" -c "$COLOR" -s $SHADOW -d $DELAY -o $OFFSET -A "$ALIGN" -l 1 --font="$FONT"
