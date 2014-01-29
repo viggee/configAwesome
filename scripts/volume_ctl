@@ -42,5 +42,7 @@ fi
 
 killall osd_cat >/dev/null 2>&1   # if the -a switch worked, we wouldn't need this
 
+echo 'updateVolIcon()' | awesome-client
+
 osd_cat -p $POS -c $COLOR -s $SHADOW -a $AGE -d $DELAY -o $OFFSET -A $ALIGN \
 -b $BARMODE --font="$FONT" -P $VOLUME -l 1 -T "Volume: $VOLUME$STATUS"
