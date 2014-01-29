@@ -160,7 +160,7 @@ end
 
 tags = {}
 for s = 1, screen.count() do
-    tags[s] = awful.tag({ "term ", "web ", "files ", "work ", 5, 6, 7, 8, 9 }, s, 
+    tags[s] = awful.tag({ " TERM ", " WEB ", " DATA ", " WORK ", 5, 6, 7, 8, 9 }, s, 
 		{ layouts[2], layouts[1], layouts[2], layouts[2], layouts[2], layouts[2], layouts[2], layouts[2], layouts[2] })
 end
 
@@ -689,7 +689,7 @@ globalkeys = awful.util.table.join(
     awful.key({ modkey,           }, "Return", function () awful.util.spawn(terminal) end),
     awful.key({ modkey, "Control" }, "r", awesome.restart),
     awful.key({ modkey, "Shift"   }, "q", awesome.quit),
-    awful.key({ modkey, "Control" }, "n", awful.client.restore),
+    awful.key({ modkey, "Shift"   }, "n", awful.client.restore),
 
     -- Prompt
     --awful.key({ modkey },            "r",     function () mypromptbox[mouse.screen]:run() end),
@@ -870,7 +870,9 @@ awful.rules.rules = {
     { rule = { class = "MATLAB" },
       properties = { tag = tags[1][5] } },      
     { rule = { class = "URxvt", name = "^mc" },
-      properties = { tag = tags[1][3] } }     
+      properties = { tag = tags[1][3] } },     
+    { rule = { name = "Fortschritt der Dateioperation" },
+      properties = { floating = true } }      
 }
 
 ---------------------------------------------------------------------------

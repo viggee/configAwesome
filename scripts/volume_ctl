@@ -30,7 +30,7 @@ fi
 
 
 STATUS=$(amixer -c $CARD sget ${CHANNEL} | grep -c "\\[on\\]")
-VOLUME=$(amixer -c $CARD sget ${CHANNEL}  | awk '$0 ~ "%" { vol=$(NF-2); \
+VOLUME=$(amixer -M -c $CARD sget ${CHANNEL}  | awk '$0 ~ "%" { vol=$(NF-2); \
      gsub("\\[", "", vol); gsub("\\]", "",vol); print vol; exit; }' )
 
 if [ $STATUS -eq 0 ]; then
@@ -41,8 +41,6 @@ else
 fi
 
 killall osd_cat >/dev/null 2>&1   # if the -a switch worked, we wouldn't need this
-
-echo 'updateVolIcon()' | awesome-client
 
 osd_cat -p $POS -c $COLOR -s $SHADOW -a $AGE -d $DELAY -o $OFFSET -A $ALIGN \
 -b $BARMODE --font="$FONT" -P $VOLUME -l 1 -T "Volume: $VOLUME$STATUS"
