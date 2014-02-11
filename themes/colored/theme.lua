@@ -105,8 +105,8 @@ theme.widget_black		= "#0e0e0e"
 
 theme.taglist_fg_focus		= "#FFFFFF"
 theme.taglist_bg_focus		= "png:" .. theme.confdir .. "/taglist/bg_focus.png"
-theme.taglist_squares_sel   = theme.confdir .. "/taglist/squaref_b.png"
-theme.taglist_squares_unsel = theme.confdir .. "/taglist/square_b.png"
+--theme.taglist_squares_sel   = theme.confdir .. "/taglist/squaref_b.png"
+theme.taglist_squares_unsel = theme.confdir .. "/taglist/bg_prog.png"
 
 --theme.taglist_squares_resize = "false"
 

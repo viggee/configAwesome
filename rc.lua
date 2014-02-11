@@ -161,7 +161,7 @@ end
 tags = {}
 for s = 1, screen.count() do
     tags[s] = awful.tag({ " TERM ", " WEB ", " DATA ", " WORK ", 5, 6, 7, 8, 9 }, s, 
-		{ layouts[2], layouts[1], layouts[2], layouts[2], layouts[2], layouts[2], layouts[2], layouts[2], layouts[2] })
+		{ layouts[2], layouts[2], layouts[2], layouts[2], layouts[2], layouts[2], layouts[2], layouts[2], layouts[2] })
 end
 
 ---------------------------------------------------------------------------
