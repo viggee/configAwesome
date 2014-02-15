@@ -872,7 +872,9 @@ awful.rules.rules = {
     { rule = { class = "URxvt", name = "^mc" },
       properties = { tag = tags[1][3] } },     
     { rule = { name = "Fortschritt der Dateioperation" },
-      properties = { floating = true } }      
+      properties = { floating = true } },
+    { rule = { class = "Exe"}, 
+      properties = { floating = true } }
 }
 
 ---------------------------------------------------------------------------
