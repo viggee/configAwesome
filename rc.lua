@@ -2,7 +2,7 @@
 -- rc.lua awesome wm config -----------------------------------------------
 ---------------------------------------------------------------------------
 
-rcType = "box"
+rcType = "notebook"
 
 ---------------------------------------------------------------------------
 -- include awesome libraries
@@ -422,7 +422,7 @@ memicon:buttons(awful.util.table.join(
 
 if rcType == "box" then
 	netInterface = "enp3s0"
-elseif rcType == "netbook" then
+elseif rcType == "notebook" then
 	netInterface = "wlp3s0"
 else
 	netInterface = "enp3s0"
