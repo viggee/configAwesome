@@ -1,0 +1,9 @@
+gtk-theme-name = "NumixHolo"
+gtk-icon-theme-name = "Faenza-Darkest"
+
+style "schrift"
+{
+font_name = "DejaVu Sans Mono 10"
+}
+widget_class "*" style "schrift"
+gtk-font-name = "DejaVu Sans Mono 10"
