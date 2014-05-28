@@ -722,6 +722,7 @@ globalkeys = awful.util.table.join(
     awful.key({ }, "XF86PowerOff",    		function () awful.util.spawn("sudo shutdown -h now") end),
     awful.key({ modkey }, "p", 				function () awful.util.spawn("thunar") end),
     awful.key({ modkey }, "c", 				function () awful.util.spawn("urxvt -e mc") end),
+    awful.key({ }, "Print", 				function () awful.util.spawn("printscreen") end),
     
     -- Zoom
     awful.key({ modkey }, "z",				function ()   

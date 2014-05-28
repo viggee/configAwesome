@@ -1,0 +1,4 @@
+#!/bin/sh
+import -window root -quality 98 /tmp/screenshot.png
+xcmenu -bi image/png < /tmp/screenshot.png
+rm /tmp/screenshot.png
