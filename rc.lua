@@ -74,16 +74,28 @@ function run_once(cmd, ip)
 	awful.util.spawn_with_shell("pgrep -u $USER -x " .. findme .. " > /dev/null || (" .. checkip .. cmd .. ")")
 end 
 
+function run_ntimes_term(name, n, cmd)
+	local f, r
+	f = io.popen("xwininfo -tree -root | grep " .. name .." | wc -l")
+	r = f:read("*l")
+	f:close()
+	n = n - r	
+	if n > 0 then		
+		for i = 1, n, 1 do
+			awful.util.spawn_with_shell(cmd)
+		end
+	end
+end
+
 ---------------------------------------------------------------------------
 -- Autostart
 ---------------------------------------------------------------------------
 
 run_once("compton -C")
 run_once("dropboxd", 1)
-run_once("thunar")
 run_once("chromium", 1)
-awful.util.spawn_with_shell("urxvt")
-awful.util.spawn_with_shell("urxvt")
+run_ntimes_term("ranger", 1, "urxvt -title ranger -e ranger")
+run_ntimes_term("Terminal", 2, "urxvt -title Terminal")
 if rcType == "box" then
 	run_once("sudo rc11mod4.py")
 	run_once("conky")
@@ -878,6 +890,10 @@ awful.rules.rules = {
       properties = { floating = true } },
     { rule = { name = "Microsoft Silverlight" }, 
       properties = { floating = true } },
+    { rule = { name = "ranger" }, 
+      properties = { tag = tags[1][3] } },
+    { rule = { name = "Terminal" }, 
+      properties = { tag = tags[1][1] } }      
 }
 
 ---------------------------------------------------------------------------
