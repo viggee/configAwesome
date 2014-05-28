@@ -2,7 +2,7 @@
 -- rc.lua awesome wm config -----------------------------------------------
 ---------------------------------------------------------------------------
 
-rcType = "notebook"
+rcType = "box"
 
 ---------------------------------------------------------------------------
 -- include awesome libraries
@@ -422,7 +422,7 @@ memicon:buttons(awful.util.table.join(
 
 if rcType == "box" then
 	netInterface = "enp3s0"
-elseif rcType == "notebook" then
+elseif rcType == "netbook" then
 	netInterface = "wlp3s0"
 else
 	netInterface = "enp3s0"
@@ -873,8 +873,10 @@ awful.rules.rules = {
       properties = { tag = tags[1][3] } },     
     { rule = { name = "Fortschritt der Dateioperation" },
       properties = { floating = true } },
-    { rule = { class = "Exe"}, 
-      properties = { floating = true } }
+    { rule = { class = "Exe" }, 
+      properties = { floating = true } },
+    { rule = { name = "Microsoft Silverlight" }, 
+      properties = { floating = true } },
 }
 
 ---------------------------------------------------------------------------

@@ -25,10 +25,10 @@ theme.icon_theme = "Faenza-Darkest"
 
 -- theme.bg_systray = theme.bg_normal
 
-theme.bg_normal     = "#080808"
-theme.bg_focus      = "#080808"
-theme.bg_urgent     = "#080808"
-theme.bg_minimize   = "#080808"
+theme.bg_normal     = "#002b36"
+theme.bg_focus      = "#002b36"
+theme.bg_urgent     = "#002b36"
+theme.bg_minimize   = "#002b36"
 
 theme.fg_normal     = "#aaaaaa"
 theme.fg_focus      = "#7788af"
@@ -56,7 +56,7 @@ theme.border_marked = "#91231c"
 theme.border_widget	= "#404040"
 
 ---------------------------------------------------------------------------
--- Menu
+-- Menu (Right Click)
 ---------------------------------------------------------------------------
 
 theme.menu_height       = "8"
@@ -64,8 +64,8 @@ theme.menu_width        = "105"
 theme.menu_border_width = "0"
 theme.menu_fg_normal    = "#aaaaaa"   --color txt pip
 theme.menu_fg_focus     = "#7788af"
-theme.menu_bg_normal    = "#080808"   --background menu
-theme.menu_bg_focus     = "#080808"
+theme.menu_bg_normal    = "#002b36"   --background menu
+theme.menu_bg_focus     = "#002b36"
 
 ---------------------------------------------------------------------------
 -- Widgets
