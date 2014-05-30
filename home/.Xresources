@@ -54,7 +54,7 @@ URxvt.intensityStyles: false
 ! URxvt*background:            S_base03
 
 URxvt*background:              S_base03_T
-URxvt*foreground:              S_base0
+URxvt*foreground:              S_base3
 URxvt*fading:                  40
 URxvt*fadeColor:               S_base03
 URxvt*cursorColor:             S_base1
