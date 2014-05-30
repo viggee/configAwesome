@@ -91,6 +91,7 @@ end
 -- Autostart
 ---------------------------------------------------------------------------
 
+run_once("udiskie")
 run_once("compton -C")
 run_once("dropboxd", 1)
 run_once("chromium", 1)
@@ -433,11 +434,11 @@ memicon:buttons(awful.util.table.join(
 ---------------------------------------------------------------------------
 
 if rcType == "box" then
-	netInterface = "enp3s0"
+	netInterface = "enp4s0"
 elseif rcType == "notebook" then
 	netInterface = "wlp3s0"
 else
-	netInterface = "enp3s0"
+	netInterface = "enp4s0"
 end
 
 netdownicon = wibox.widget.imagebox()
@@ -732,8 +733,7 @@ globalkeys = awful.util.table.join(
     awful.key({ }, "XF86MonBrightnessDown", function () awful.util.spawn("brightness_ctl") end),
     awful.key({ }, "XF86Launch1",    		function () awful.util.spawn("urxvt -e wicd-curses") end),
     awful.key({ }, "XF86PowerOff",    		function () awful.util.spawn("sudo shutdown -h now") end),
-    awful.key({ modkey }, "p", 				function () awful.util.spawn("thunar") end),
-    awful.key({ modkey }, "c", 				function () awful.util.spawn("urxvt -e mc") end),
+    awful.key({ modkey }, "p", 				function () awful.util.spawn_with_shell("urxvt -e ranger") end),
     awful.key({ }, "Print", 				function () awful.util.spawn("printscreen") end),
     
     -- Zoom
@@ -890,9 +890,9 @@ awful.rules.rules = {
       properties = { floating = true } },
     { rule = { name = "Microsoft Silverlight" }, 
       properties = { floating = true } },
-    { rule = { name = "ranger" }, 
+    { rule = { class = "URxvt", name = "ranger" }, 
       properties = { tag = tags[1][3] } },
-    { rule = { name = "Terminal" }, 
+    { rule = { class = "URxvt", name = "Terminal" }, 
       properties = { tag = tags[1][1] } }      
 }
 

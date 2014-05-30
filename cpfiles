@@ -1,0 +1,15 @@
+#!/bin/sh
+
+# awesome
+cp ~/.config/awesome/rc.lua /mnt/Storage/GitHub/configAwesome/
+cp -r ~/.config/awesome/themes/* /mnt/Storage/GitHub/configAwesome/themes/
+
+# ranger
+cp -r ~/.config/ranger /mnt/Storage/GitHub/configAwesome/home/.config/
+
+# misc
+cp ~/.bashrc /mnt/Storage/GitHub/configAwesome/home/
+cp ~/.gtkrc.mine /mnt/Storage/GitHub/configAwesome/home/
+cp ~/.Xresources /mnt/Storage/GitHub/configAwesome/home/
+cp -r ~/.config/gtk-3.0/settings.ini /mnt/Storage/GitHub/configAwesome/home/.config/gtk-3.0/settings.ini
+
