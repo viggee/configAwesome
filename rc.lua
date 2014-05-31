@@ -92,16 +92,17 @@ end
 ---------------------------------------------------------------------------
 
 run_once("udiskie")
+run_once("clipit")
 run_once("compton -C")
 run_once("dropboxd", 1)
 run_once("chromium", 1)
 run_ntimes_term("ranger", 1, "urxvt -title ranger -e ranger")
 run_ntimes_term("Terminal", 2, "urxvt -title Terminal")
+run_ntimes_term("ncmpcpp", 1, "urxvt -title ncmpcpp -e ncmpcpp")
 if rcType == "box" then
 	run_once("sudo rc11mod4.py")
 	run_once("conky")
-	run_once("mpd")
-	run_once("parcellite")
+	run_once("mpd")	
 end
 
 ---------------------------------------------------------------------------
@@ -733,6 +734,7 @@ globalkeys = awful.util.table.join(
     awful.key({ }, "XF86MonBrightnessDown", function () awful.util.spawn("brightness_ctl") end),
     awful.key({ }, "XF86Launch1",    		function () awful.util.spawn("urxvt -e wicd-curses") end),
     awful.key({ }, "XF86PowerOff",    		function () awful.util.spawn("sudo shutdown -h now") end),
+    awful.key({ }, "XF86Calculator",   		function () awful.util.spawn("speedcrunch") end),
     awful.key({ modkey }, "p", 				function () awful.util.spawn_with_shell("urxvt -e ranger") end),
     awful.key({ }, "Print", 				function () awful.util.spawn("printscreen") end),
     
@@ -890,10 +892,16 @@ awful.rules.rules = {
       properties = { floating = true } },
     { rule = { name = "Microsoft Silverlight" }, 
       properties = { floating = true } },
-    { rule = { class = "URxvt", name = "ranger" }, 
+    { rule = { class = "URxvt", name = "^ranger$" }, 
       properties = { tag = tags[1][3] } },
+    { rule = { class = "URxvt", name = "ranger-opened-by-app" }, 
+      properties = { floating = "true" } },      
     { rule = { class = "URxvt", name = "Terminal" }, 
-      properties = { tag = tags[1][1] } }      
+      properties = { tag = tags[1][1] } },
+    { rule = { class = "Speedcrunch", name = "SpeedCrunch" },
+	  properties = { floating = true, ontop = true } },
+    { rule = { class = "URxvt", name = "^ncmpcpp" }, 
+      properties = { tag = tags[1][9] } }     
 }
 
 ---------------------------------------------------------------------------
