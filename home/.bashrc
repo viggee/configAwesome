@@ -76,8 +76,6 @@ alias mv='mv -i'
 
 export _JAVA_OPTIONS="-Dawt.useSystemAAFontSettings=on -Dswing.defaultlaf=com.sun.java.swing.plaf.gtk.GTKLookAndFeel"
 
-eval $(dircolors -b $HOME/.dircolors)
-
 orphans() {
   if [[ ! -n $(pacman -Qdt) ]]; then
     echo no orphans to remove

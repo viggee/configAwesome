@@ -16,7 +16,7 @@ theme.confdir = os.getenv("HOME") .. "/.config/awesome/themes/colored"
 ---------------------------------------------------------------------------
 
 theme.font      = "Termsyn 12"
-theme.wallpaper = "/home/viktor/Bilder/Wallpaper/blue_noise.png"
+theme.wallpaper = "/home/viktor/Bilder/vim-shortcuts_1920x1080.png"
 theme.icon_theme = "Faenza-Darkest"
 
 ---------------------------------------------------------------------------

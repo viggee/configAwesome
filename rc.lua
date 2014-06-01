@@ -901,7 +901,12 @@ awful.rules.rules = {
     { rule = { class = "Speedcrunch", name = "SpeedCrunch" },
 	  properties = { floating = true, ontop = true } },
     { rule = { class = "URxvt", name = "^ncmpcpp" }, 
-      properties = { tag = tags[1][9] } }     
+      properties = { tag = tags[1][9] } },    
+    { rule = { class = "Gucharmap", name = "Zeichentabelle" },
+	  properties = { floating = true },
+      callback = function(c) 
+            awful.placement.centered(c,nil)
+            end }
 }
 
 ---------------------------------------------------------------------------
